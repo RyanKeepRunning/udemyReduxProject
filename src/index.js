@@ -3,11 +3,24 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import {createStore,combineReducers} from 'redux';
+import {createStore,combineReducers,applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import counterReducer from './store/reducers/counter';
 import resultReducer from './store/reducers/result';
-const store = createStore(combineReducers({counterReducer,resultReducer}));
+
+const logger = store =>{ //store=>next=>action =>return next(action) to continue
+    return next => {
+        return action =>{
+            console.log('Middleware dispatching',action);
+            const result = next(action);
+            console.log('Middleware next state',store.getState());
+            return result;
+        }
+    }
+}
+
+const store = createStore(combineReducers({counterReducer,resultReducer}),
+                            applyMiddleware(logger)); 
 
 ReactDOM.render(<Provider store={store}>
                     <App />
