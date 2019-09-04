@@ -4,5 +4,12 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import counterReducer from './store/counterReducer';
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+const store = createStore(counterReducer);
+
+ReactDOM.render(<Provider store={store}>
+                    <App />
+                </Provider>, document.getElementById('root'));
 registerServiceWorker();
