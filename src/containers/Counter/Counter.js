@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
-import * as actionTypes from '../../store/actions';
+import {increment,decrement,add,substract,record,del} from '../../store/actions/actions';
 import {connect} from 'react-redux';
+
 
 class Counter extends Component {
     state = {
@@ -66,16 +67,24 @@ const mapStateToProps = (state)=>{
         result:state.resultReducer.result
     }
 }
-const mapDispatchToProps = dispatch =>{
-    return {
-        onIncrementCounter: ()=>dispatch({type:actionTypes.INCREMENT}),
-        onDecrementCounter:()=>dispatch({type:actionTypes.DECREMENT}),
-        onCounterAdd:(value)=>dispatch({type:actionTypes.ADD,payload:{value}}),
-        onCounterSubstract:(value)=>dispatch({type:actionTypes.SUBSTRACT,payload:{value}}),
+// const mapDispatchToProps = (dispatch) => {
+//     return{
+//         onIncrementCounter: ()=>dispatch(increment()),
+//         onDecrementCounter:()=>dispatch(decrement()),
+//         onCounterAdd:(value)=>dispatch(add(value)),
+//         onCounterSubstract:(value)=>dispatch(substract(value)),
+//         onPutIntoRecord:(counter)=>dispatch(record(counter)),
+//         onDeleteRecord:(id)=>dispatch(del(id))
+//     }
+// }
 
-        onPutIntoRecord:(counter)=>dispatch({type:actionTypes.RECORD,payload:{counter}}),
-        onDeleteRecord:(id)=>dispatch({type:actionTypes.DELETE,payload:{id}})
-    }
+const mapDispatchToProps =  {
+        onIncrementCounter: increment,
+        onDecrementCounter: decrement,
+        onCounterAdd:add,
+        onCounterSubstract:substract,
+        onPutIntoRecord:record,
+        onDeleteRecord:del
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Counter);
