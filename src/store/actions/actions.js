@@ -28,11 +28,18 @@ export const substract = (value)=>{
     }
 }
 
-export const record = (counter)=>{
+export const record_sync = (counter)=>{
     return {
         type:RECORD,payload:{counter}
     }
 }
+
+export const record = (counter)=>{
+    return dispatch=>{
+        setTimeout(()=>{dispatch(record_sync(counter))},2000);
+    }
+}
+
 
 export const del = (id)=>{
     return {
