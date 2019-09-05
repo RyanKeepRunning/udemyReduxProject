@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
-import {increment,decrement,add,substract,record,del} from '../../store/actions/actions';
+import {increment,decrement,add,substract} from '../../store/actions/counter';
+import {record,del} from '../../store/actions/result';
 import {connect} from 'react-redux';
 
 
